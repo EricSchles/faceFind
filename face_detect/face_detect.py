@@ -20,7 +20,8 @@ def run(imagePath):
     image = cv2.imread(imagePath)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    scaling = [1.1,1.2,1.3,1.4]
+    scaling = [1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2]
+    neighbors = [1,2,3]
 # Detect faces in the image
     faces = faceCascade.detectMultiScale(
         gray,
@@ -32,17 +33,24 @@ def run(imagePath):
 
     if len(faces) != 1:
         for scale in scaling:
-            for min_size in xrange(10,70,10):
-                faces = faceCascade.detectMultiScale(
-                    gray,
-                    scaleFactor=scale,
-                    minNeighbors=1,
-                    minSize=(min_size, min_size),
-                    flags = cv2.cv.CV_HAAR_SCALE_IMAGE
-                    )
-                if 2 > len(faces) > 0:
-                    break
-    
+            for min_size in xrange(10,100,10):
+                for neighbor in neighbors:
+                    faces = faceCascade.detectMultiScale(
+                        gray,
+                        scaleFactor=scale,
+                        minNeighbors=neighbor,
+                        minSize=(min_size, min_size),
+                        flags = cv2.cv.CV_HAAR_SCALE_IMAGE
+                        )
+                    for (x, y, w, h) in faces:
+                        cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+                    cv2.imshow("Faces found", image)
+                    cv2.waitKey(20)
+                    
+                    if 2 > len(faces) > 0:
+                        break
+                
     
     if len(faces) == 1:
         
@@ -54,11 +62,7 @@ def run(imagePath):
         print imagePath," this file should be removed"
         os.remove(imagePath)
 
-    #print "Found {0} faces!".format(len(faces))
+    print "Found {0} faces!".format(len(faces))
 
 ## Draw a rectangle around the faces
-    # for (x, y, w, h) in faces:
-    #     cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-    # cv2.imshow("Faces found", image)
-    # cv2.waitKey(2000)
+    

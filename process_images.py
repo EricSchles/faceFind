@@ -11,4 +11,4 @@ for image in images:
     im.save(png_img)
     print png_img
     run(png_img)
-    os.remove(image)
+    #os.remove(image)
