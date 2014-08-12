@@ -1,4 +1,4 @@
-from FaceDetect.face_detect import run
+from face_detect.face_detect import run
 import glob
 import Image
 import os
