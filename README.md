@@ -10,6 +10,10 @@ If you are using windows or mac, openCV should be a snap to get.  Just head over
 
 #how to run:
 
-making this tool work should be a snap.  Simply move some files into the preprocessed directory and then run python process_images.py from the top level directory.  You should see any pictures with faces in the withFace directory.  
+making this tool work should be a snap.  Simply move some files into the preprocessed directory and then run:
+
+python process_images.py 
+
+from the top level directory.  You should see any pictures with faces in the withFace directory.  
 
 Note:  All pictures in preprocessed will be converted to .png's if you want to avoid making this permanent PLEASE copy instead of moving pictures into this directory.
