@@ -4,6 +4,7 @@ import Image
 import os
 images = glob.glob("preprocessed/*")
 
+#adding comment for no reason
 for image in images:
     png_img = image.split(".")[0] + ".png"
     im = Image.open(image)
