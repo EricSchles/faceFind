@@ -46,7 +46,7 @@ def run(imagePath):
                         cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
                     cv2.imshow("Faces found", image)
-                    cv2.waitKey(20)
+                    cv2.waitKey(2000)
                     
                     if 2 > len(faces) > 0:
                         break
@@ -54,6 +54,10 @@ def run(imagePath):
     
     if len(faces) == 1:
         
+        for (x,y,w,h) in faces:
+          cv2.rectangle(image, (x,y), (x+w, y+h), (0,255,0), 2)
+        cv2.imshow("faces found", image)
+        cv2.waitKey(2000)
         i = Image.open(imagePath)
         new_image = imagePath.split("/")[1]
         os.chdir("withFace")
