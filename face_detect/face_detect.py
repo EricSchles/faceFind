@@ -13,7 +13,7 @@ from helper import convert_rgb_to_bgr,normalize_image_for_face_detection
 
 def run(imagePath):
 # Create the haar cascadels
-    cascPath = "FaceDetect/haarcascade_frontalface_default.xml"
+    cascPath = "face_detect/haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
     
 # Read the image
@@ -33,7 +33,7 @@ def run(imagePath):
 
     if len(faces) != 1:
         for scale in scaling:
-            for min_size in xrange(10,100,10):
+            for min_size in [10,20,30]:
                 for neighbor in neighbors:
                     faces = faceCascade.detectMultiScale(
                         gray,
@@ -62,7 +62,7 @@ def run(imagePath):
         print imagePath," this file should be removed"
         os.remove(imagePath)
 
-    print "Found {0} faces!".format(len(faces))
+    #print "Found {0} faces!".format(len(faces))
 
 ## Draw a rectangle around the faces
     
